@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { initGnomes, setGnomes } from '../../redux/actions/gnomes';
 
 const ContainerDiv = styled.div``;
 
 class GnomeContainer extends React.Component {
-  componentWillMount() {}
+  componentDidMount() {
+    this.props.initGnomes();
+  }
 
   render() {
     return <ContainerDiv>Test </ContainerDiv>;
@@ -15,7 +18,12 @@ class GnomeContainer extends React.Component {
 
 GnomeContainer.propTypes = {};
 
-const mapDispatchtoProps = {};
+// actions
+const mapDispatchtoProps = {
+  initGnomes,
+  setGnomes,
+};
+// selectors
 const mapStateToProps = state => ({});
 
 export default connect(

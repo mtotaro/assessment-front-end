@@ -1,8 +1,7 @@
 import { INIT_GNOMES, SET_GNOMES, GNOMES_ERROR } from '../constants';
 import gnomesApi from '../../api/gnomes';
 
-export const initGnomes = () => dispatch => gnomesApi
-  .data()
+export const initGnomes = () => dispatch => gnomesApi.data
   .then((res) => {
     dispatch({
       type: INIT_GNOMES,
