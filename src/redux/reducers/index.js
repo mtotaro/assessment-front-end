@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
+import gnomes from './gnomes';
 
-const reducers = {};
+const reducers = {
+  gnomes,
+};
 
 const aplicationReducers = combineReducers({
   ...reducers,
