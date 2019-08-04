@@ -6,7 +6,15 @@ import { initGnomes, setGnomes } from '../../redux/actions/gnomes';
 import GnomeComponent from '../../components/GnomeComponent';
 import { gnomeListSelector } from '../../redux/selectors/gnomeList';
 
-const ContainerDiv = styled.div``;
+const ContainerDiv = styled.div`
+  position: relative;
+  z-index: 0;
+  padding: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 50px;
+`;
 
 class GnomeContainer extends React.Component {
   componentDidMount() {
@@ -16,7 +24,11 @@ class GnomeContainer extends React.Component {
   render() {
     const { gnomeList } = this.props;
     if (gnomeList != null) {
-      return <GnomeComponent gnomeList={gnomeList} />;
+      return (
+        <ContainerDiv>
+          <GnomeComponent gnomeList={gnomeList} />
+        </ContainerDiv>
+      );
     }
     return <div>Loading...</div>;
   }
@@ -31,7 +43,7 @@ const mapDispatchtoProps = {
   initGnomes,
   setGnomes,
 };
-// selectors  // TODO:  hacer un selector de la lista y mapear luego
+// selectors
 const mapStateToProps = state => ({
   gnomeList: gnomeListSelector(state),
 });
