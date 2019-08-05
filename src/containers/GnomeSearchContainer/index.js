@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { searchGnome, stopSearch } from '../../redux/actions/gnomes';
@@ -18,7 +17,7 @@ class GnomeSearchContainer extends Component {
 
   render() {
     return (
-      <GnomeSearchComponent type="text" onChange={this.handleChange} placeholder="Search..." />
+      <GnomeSearchComponent type="text" onChange={this.handleChange} placeholder="Search" />
     );
   }
 }

@@ -141,16 +141,16 @@ const GnomeInformationComponent = ({
 );
 
 GnomeInformationComponent.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  age: PropTypes.number,
-  height: PropTypes.number,
-  weight: PropTypes.number,
-  haircolor: PropTypes.string,
-  thumbnail: PropTypes.string,
-  professions: PropTypes.object,
-  friends: PropTypes.object,
-  goBack: PropTypes.func,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  weight: PropTypes.number.isRequired,
+  haircolor: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  professions: PropTypes.array.isRequired,
+  friends: PropTypes.array.isRequired,
+  goBack: PropTypes.func.isRequired,
 };
 
 export default GnomeInformationComponent;

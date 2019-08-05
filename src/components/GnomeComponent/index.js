@@ -59,8 +59,9 @@ const GnomeComponent = ({ gnomeList, pages, pagesShown }) => {
 
 
 GnomeComponent.propTypes = {
-
-  gnomeList: PropTypes.arrayOf(PropTypes.object),
+  pages: PropTypes.number.isRequired,
+  pagesShown: PropTypes.number.isRequired,
+  gnomeList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default GnomeComponent;

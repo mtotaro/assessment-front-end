@@ -18,9 +18,9 @@ const GnomeInformationComponent = ({ type, onChange, placeholder }) => (
 );
 
 GnomeInformationComponent.propTypes = {
-  type: PropTypes.string,
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
 };
 
 export default GnomeInformationComponent;

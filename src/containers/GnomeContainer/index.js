@@ -16,6 +16,7 @@ const ContainerDiv = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 50px;
+  background-color:grey;
 `;
 const ContainerSearch = styled.div`
   position: fixed;
