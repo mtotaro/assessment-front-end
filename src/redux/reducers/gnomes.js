@@ -29,7 +29,7 @@ export default handleActions(
     }),
     [NEXT_PAGE]: state => ({
       ...state,
-      pagesShown: state.pages + 1,
+      pages: state.pages + 1,
     }),
   },
   initialState,

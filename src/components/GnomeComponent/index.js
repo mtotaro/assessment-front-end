@@ -34,10 +34,19 @@ const Image = styled.img`
   background-size: cover;
 `;
 
-const GnomeComponent = ({ gnomeList }) => (
-  <Container2>
-    {gnomeList.map(gnome => (
-      <Container key={gnome.id}>
+let numOfGnomes;
+const pagination = 'pagin';
+
+const GnomeComponent = ({ gnomeList, pages, pagesShown }) => {
+  if (pagesShown) {
+    numOfGnomes = pagesShown * pages;
+  } else {
+    numOfGnomes = gnomeList.length;
+  }
+  const paginatedGnomes = gnomeList.slice(0, numOfGnomes);
+  return (<Container2>
+    {paginatedGnomes.map(gnome => (
+      <Container key={gnome.id} className={pagination}>
         <Link to={`/gnome/${gnome.id}`}>
           <Paragraph>{gnome.name}</Paragraph>
           <Image alt={gnome.name} src={gnome.thumbnail} />
@@ -45,11 +54,12 @@ const GnomeComponent = ({ gnomeList }) => (
       </Container>
     ))}
   </Container2>
-);
+  );
+};
+
 
 GnomeComponent.propTypes = {
-  pagesShown: PropTypes.number,
-  perPage: PropTypes.number,
+
   gnomeList: PropTypes.arrayOf(PropTypes.object),
 };
 

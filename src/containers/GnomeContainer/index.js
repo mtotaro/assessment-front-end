@@ -58,7 +58,7 @@ class GnomeContainer extends Component {
     const { pages } = this.props;
     if (scrolling) return;
     if (totalPages <= pages) return;
-    const lastGnome = document.querySelector('.pagin-selector:last-child');
+    const lastGnome = document.querySelector('.pagin:last-child');
     if (lastGnome) {
       const lastGnomeOffset = lastGnome.offsetTop + lastGnome.clientHeight;
       const pageOffset = window.pageYOffset + window.innerHeight;
@@ -72,13 +72,6 @@ class GnomeContainer extends Component {
   render() {
     const { gnomeList, pages } = this.props;
 
-    let numOfGnomes;
-    if (pages) {
-      numOfGnomes = pages * this.state.perPage;
-    } else {
-      numOfGnomes = 1337;
-    }
-    const newGnomeList = gnomeList ? gnomeList.slice(0, numOfGnomes) : null;
 
     if (gnomeList != null) {
       return (
@@ -87,7 +80,7 @@ class GnomeContainer extends Component {
             <GnomeSearchContainer />
           </ContainerSearch>
           <ContainerDiv>
-            <GnomeComponent gnomeList={newGnomeList} />
+            <GnomeComponent gnomeList={gnomeList} pages={pages} pagesShown={this.state.perPage} />
           </ContainerDiv>
         </div>
       );
