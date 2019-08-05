@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { initGnomes, setGnomes } from '../../redux/actions/gnomes';
+import ReactLoading from 'react-loading';
+import { initGnomes, setGnomes, nextPage } from '../../redux/actions/gnomes';
 import GnomeComponent from '../../components/GnomeComponent';
-import { gnomeListSelector } from '../../redux/selectors/gnomeList';
+import { gnomeListSelector, pagesSelector } from '../../redux/selectors/gnomeList';
 import GnomeSearchContainer from '../GnomeSearchContainer';
 
 const ContainerDiv = styled.div`
@@ -26,13 +27,59 @@ const ContainerSearch = styled.div`
   margin-top: -55px;
 `;
 
-class GnomeContainer extends React.Component {
+const Loading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+class GnomeContainer extends Component {
+  state = {
+    scrolling: false,
+    perPage: 20,
+    totalPages: 67,
+  };
+
   componentDidMount() {
     this.props.initGnomes();
+    this.scrollListener = window.addEventListener('scroll', (e) => {
+      this.handleScroll(e);
+    });
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', (e) => {
+      this.handleScroll(e);
+    });
+  }
+
+  handleScroll = (e) => {
+    const { scrolling, totalPages } = this.state;
+    const { pages } = this.props;
+    if (scrolling) return;
+    if (totalPages <= pages) return;
+    const lastGnome = document.querySelector('.pagin-selector:last-child');
+    if (lastGnome) {
+      const lastGnomeOffset = lastGnome.offsetTop + lastGnome.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+      const bottomOffset = 10;
+      if (pageOffset > lastGnomeOffset - bottomOffset) {
+        this.props.nextPage();
+      }
+    }
+  };
+
   render() {
-    const { gnomeList } = this.props;
+    const { gnomeList, pages } = this.props;
+
+    let numOfGnomes;
+    if (pages) {
+      numOfGnomes = pages * this.state.perPage;
+    } else {
+      numOfGnomes = 1337;
+    }
+    const newGnomeList = gnomeList ? gnomeList.slice(0, numOfGnomes) : null;
+
     if (gnomeList != null) {
       return (
         <div>
@@ -40,27 +87,35 @@ class GnomeContainer extends React.Component {
             <GnomeSearchContainer />
           </ContainerSearch>
           <ContainerDiv>
-            <GnomeComponent gnomeList={gnomeList} />
+            <GnomeComponent gnomeList={newGnomeList} />
           </ContainerDiv>
         </div>
       );
     }
-    return <div>Loading...</div>;
+    return (
+      <Loading>
+        <ReactLoading type="spinningBubbles" delay={0} width={50} color="#FFAD5E" />
+      </Loading>
+    );
   }
 }
 
 GnomeContainer.propTypes = {
+  perPage: PropTypes.number,
   gnomeList: PropTypes.arrayOf(PropTypes.object),
+  pages: PropTypes.number,
 };
 
 // actions
 const mapDispatchtoProps = {
   initGnomes,
   setGnomes,
+  nextPage,
 };
 // selectors
 const mapStateToProps = state => ({
   gnomeList: gnomeListSelector(state),
+  pages: pagesSelector(state),
 });
 
 export default connect(

@@ -48,6 +48,8 @@ const GnomeComponent = ({ gnomeList }) => (
 );
 
 GnomeComponent.propTypes = {
+  pagesShown: PropTypes.number,
+  perPage: PropTypes.number,
   gnomeList: PropTypes.arrayOf(PropTypes.object),
 };
 

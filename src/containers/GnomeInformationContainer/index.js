@@ -11,25 +11,31 @@ class GnomeInformationContainer extends Component {
   componentDidMount() {}
 
   render() {
-    let gnomeInformation = <Redirect to="/" />;
-    gnomeInformation = (
-      <div>
-        <GnomeInformationComponent
-          name={this.props.details.name}
-          age={this.props.details.age}
-          height={this.props.details.height}
-          weight={this.props.details.weight}
-          thumbnail={this.props.details.thumbnail}
-          haircolor={this.props.details.hair_color}
-        />
-      </div>
-    );
-    return (
-      <div>
-        <h2>Gnome detail</h2>
-        {gnomeInformation}
-      </div>
-    );
+    if (this.props.details) {
+      let gnomeInformation = <Redirect to="/" />;
+      gnomeInformation = (
+        <ContainerDiv>
+          <GnomeInformationComponent
+            id={this.props.details.id}
+            name={this.props.details.name}
+            age={this.props.details.age}
+            height={this.props.details.height}
+            weight={this.props.details.weight}
+            thumbnail={this.props.details.thumbnail}
+            haircolor={this.props.details.hair_color}
+            professions={this.props.details.professions}
+            friends={this.props.details.friends}
+          />
+        </ContainerDiv>
+      );
+      return (
+        <div>
+          <h2>Gnome detail</h2>
+          {gnomeInformation}
+        </div>
+      );
+    }
+    return <Redirect to="/" />;
   }
 }
 

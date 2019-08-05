@@ -9,3 +9,8 @@ export const gnomeInformationSelector = createSelector(
   [gnomeListSelector, (state, props) => props],
   (list, id) => (list ? list.find(u => u.id == id) : null),
 );
+
+export const pagesSelector = createSelector(
+  state => state.gnomes.pages,
+  pagesS => pagesS,
+);
