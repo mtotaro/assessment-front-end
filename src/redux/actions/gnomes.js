@@ -1,4 +1,6 @@
-import { INIT_GNOMES, SET_GNOMES, GNOMES_ERROR } from '../constants';
+import {
+  INIT_GNOMES, SET_GNOMES, GNOMES_ERROR, SEARCH_GNOME,
+} from '../constants';
 import gnomesApi from '../../api/gnomes';
 
 export const initGnomes = () => dispatch => gnomesApi.data
@@ -13,3 +15,5 @@ export const initGnomes = () => dispatch => gnomesApi.data
   });
 
 export const setGnomes = gnomes => dispatch => dispatch({ type: SET_GNOMES, payload: { gnomes } });
+
+export const searchGnome = search => dispatch => dispatch({ type: SEARCH_GNOME, payload: search });
