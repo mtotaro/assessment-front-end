@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 export const gnomeListSelector = createSelector(
-  state => state.gnomes.brastlewark,
+  state => (state.gnomes.searchgnomes ? state.gnomes.searchgnomes : state.gnomes.brastlewark),
   list => list,
 );
 
